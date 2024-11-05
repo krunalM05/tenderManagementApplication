@@ -7,7 +7,7 @@ we will break down this problem in two steps
 
 ### Implementing CRUD APIs
 1. first download unImplemented TenderManganement Project and import it in STS IDE as existing maven project.
-   unImplemented project location: inside DemoTenderMgmtProject folder, Solution/Implemented project loc: 
+   unImplemented project location: inside DemoTenderMgmtProject folder, Solution/Implemented project loc: folder tenderManagement
 3. check all packages - service, repository, controller, model, etc and add required annotaions in the classes if not added
    for service -> @Service
    for repository -> @Repository
