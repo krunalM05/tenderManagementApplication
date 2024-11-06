@@ -110,6 +110,26 @@ we will break down this problem in two steps
 9. now, add some users BIDDER and APPROVER using DataLoader class which implements ApplicationRunner, and override run menthod
    ![image](https://github.com/user-attachments/assets/03a3217b-aea9-418a-b3d6-2a391136bef2)
 
+### Final Testing 
+
+1. open postman, and login using BIDDER and APPROVER and collect tokens
+   ![image](https://github.com/user-attachments/assets/c5a87910-e877-4bbb-985f-465db2015f13)
+   ![image](https://github.com/user-attachments/assets/fd4459b4-e233-4674-90b4-2a94419fc05a)
+
+2. post BiddingModel objects using BIDDER token as authorization endpoint /bidding/add
+   ![image](https://github.com/user-attachments/assets/a992f7a0-bc89-40c7-a76b-5d121083c409)
+
+3. list Bidding object using APPROVER token endpoint /bidding/list
+   ![image](https://github.com/user-attachments/assets/e6c47b48-c963-4e38-9752-1ea28b0534aa)
+
+4. similarly you can test delete and update endpoints, also cross verify try to exchange Bearer token, its will give response as Forbidden
+   As BIDDER have access to /bidding/add and /bidding/update
+   and APPROVER have access to /bidding/delete and /bidding/list
+
+
+
+
+
    
 
 
