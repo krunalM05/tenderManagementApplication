@@ -49,6 +49,73 @@ we will break down this problem in two steps
 11. Check delete API by deleting any biddingModel record by providing Id
     ![deleteAPI](https://github.com/user-attachments/assets/a47f0aad-93de-4e5b-bebb-9f35d8e180f0)
 
+### JWT Implementation
+
+1. Solution for JWT is inside folder FinalSolutionJWT, you can reference that code while implementing JWT in your project.
+2. Add dependecies in your pom.xml file
+   
+   <!-- jwt dependencies are here-->      
+  		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-api</artifactId>
+    		<version>0.11.5</version>
+  		</dependency>
+  		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-impl</artifactId>
+    		<version>0.11.5</version>
+  		</dependency>
+  		<dependency>
+    		<groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt-jackson</artifactId>
+    		<version>0.11.5</version>
+  		</dependency>
+ 
+   ![springsecuDep](https://github.com/user-attachments/assets/d5efd245-3a52-4be7-8fb0-e1991dff3a0f)
+   ![jwtDep](https://github.com/user-attachments/assets/4db55b44-7fd2-4784-8ec6-793d9468c81d)
+
+3. implemts UserModel class by UserDetails and override unImplemeted methods of UserDetails
+   ![userM](https://github.com/user-attachments/assets/3843d0d4-5033-46af-b451-9d38147a9e37)
+
+   here the UserDetails and UserModel has same methods coincendently i.e getUsername() method -> so we rename method of UserModel to getUserName() do avoid error.
+4. implement JWTUtil class logic refere solution code for it, there are several methods we need to implement
+   jwtExpiration and SecretKey we will specify through application.properties file so add then in that file
+   ![image](https://github.com/user-attachments/assets/7aa5b5f0-e879-40ac-9960-eda0ee2872ee)
+
+5. Now, implement the logic of AuthenticationFilter class extends this class by OncePerRequestFilter class add unImplemented methods.
+   here, we took help of UserAuthService class which implements UserDetailsService, it has one method loadUserByUserName(), need to implement that method as per our bussiness logic
+   whether we want to login user by email and password or username and password. here in this case we are login using email and password, so our loadUserByUserName() method
+   must return UserDetails object by using email specified.
+   ![image](https://github.com/user-attachments/assets/1fe10183-0e47-496e-a05e-06ca0f68b39f)
+
+   ![image](https://github.com/user-attachments/assets/98fce1ae-62b5-4005-a646-400b2f618e53)
+
+
+7. then, implement SecurityConfig class refere final solution code for it
+   ![image](https://github.com/user-attachments/assets/bb0086e4-7eb3-4402-ab70-eab8f236c256)
+
+   here, the user which has ROLE = APPROVER can only access /login, /bidding/list, /bidding/delete endpoints
+   and the user Which has ROLE = BIDDER can only access /login, /bidding/add, /bidding/update endpoints
+   /login is access by anyone irrespictive of role.
+
+8. now, we will implements logic for /login endpoint, means when user hits /login endpoint, we will get token which is unique for each user.
+   using that token (Bearer token) user will access endpoints which are restricted.
+
+   First, write LoginController:-
+   ![image](https://github.com/user-attachments/assets/d7222fa9-ae59-4232-87ff-c39eb80f7d92)
+
+   then implemts actual bussiness logic inside class LoginService class:-
+   ![image](https://github.com/user-attachments/assets/ae59a273-10f4-4643-a458-04c670da9cf0)
+
+9. now, add some users BIDDER and APPROVER using DataLoader class which implements ApplicationRunner, and override run menthod
+   ![image](https://github.com/user-attachments/assets/03a3217b-aea9-418a-b3d6-2a391136bef2)
+
+   
+
+
+   
+
+
 
 
 
